@@ -147,11 +147,26 @@ const data = [
 const PageContent = () => {
   return (
     <Layout style={{ padding: "0 24px 0px" }}>
-      <Breadcrumb style={{ margin: "16px 0" }}>
-        <Breadcrumb.Item>Home</Breadcrumb.Item>
-        <Breadcrumb.Item>Administration</Breadcrumb.Item>
-        <Breadcrumb.Item>Users</Breadcrumb.Item>
-      </Breadcrumb>
+      <Row gutter={[16, 16]}>
+        <Col>
+          <Breadcrumb style={{ margin: "16px 0" }}>
+            <Breadcrumb.Item>Home</Breadcrumb.Item>
+            <Breadcrumb.Item>Administration</Breadcrumb.Item>
+            <Breadcrumb.Item>Users</Breadcrumb.Item>
+          </Breadcrumb>
+        </Col>
+        <Col
+          flex="auto"
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            marginTop: "10px",
+          }}
+        >
+          <Button type="primary" shape="circle" icon={<PlusOutlined />} />
+        </Col>
+      </Row>
+
       <Content style={{ marginBottom: 0, minHeight: 1500 }}>
         <Row gutter={[16, 16]}>
           <Col flex="200px">
@@ -165,10 +180,7 @@ const PageContent = () => {
             />
           </Col>
           <Col flex="auto">
-            <>
-              <Button type="primary" shape="circle" icon={<PlusOutlined />} />
-              <Table columns={columns} dataSource={data} />
-            </>
+            <Table columns={columns} dataSource={data} />
           </Col>
         </Row>
       </Content>
