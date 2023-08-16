@@ -103,9 +103,11 @@ const columns = [
   {
     title: "Action",
     key: "action",
-    render: (_, record) => (
+    render: (_, { key }) => (
       <Space size="middle">
-        <Button size={"small"}>Edit</Button>
+        <Button size={"small"} href={`/users/${key}`}>
+          Edit
+        </Button>
         <Popconfirm title="Delete user?" okText="Yes" cancelText="No">
           <Button size={"small"} danger>
             Delete
