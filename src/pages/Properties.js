@@ -13,9 +13,6 @@ import {
 } from "antd";
 
 import {
-  LaptopOutlined,
-  NotificationOutlined,
-  UserOutlined,
   PlusOutlined,
   ContainerOutlined,
   DesktopOutlined,
@@ -23,33 +20,47 @@ import {
   PieChartOutlined,
 } from "@ant-design/icons";
 
-const { Content, Sider } = Layout;
+import users from "../seeds/users";
 
-const confirm = (e) => {
-  console.log(e);
-  message.success("Click on Yes");
-};
-const cancel = (e) => {
-  console.log(e);
-  message.error("Click on No");
-};
+const { Content } = Layout;
 
-function getItem(label, key, icon, children, type) {
-  return {
-    key,
-    icon,
-    children,
-    label,
-    type,
-  };
-}
-
-const items = [
-  getItem("Users", "1", <PieChartOutlined />),
-  getItem("Roles", "2", <PieChartOutlined />),
-  getItem("Users Access", "3", <ContainerOutlined />),
-  getItem("SurveyGroups", "4", <DesktopOutlined />),
-  getItem("Properties", "5", <MailOutlined />),
+const menuItems = [
+  {
+    key: "1",
+    icon: <PieChartOutlined />,
+    label: (
+      <a href="/users" rel="noopener noreferrer">
+        Users
+      </a>
+    ),
+  },
+  {
+    key: "2",
+    icon: <ContainerOutlined />,
+    label: (
+      <a href="/roles" rel="noopener noreferrer">
+        Roles
+      </a>
+    ),
+  },
+  {
+    key: "3",
+    icon: <DesktopOutlined />,
+    label: (
+      <a href="/survey-groups" rel="noopener noreferrer">
+        SurveyGroups
+      </a>
+    ),
+  },
+  {
+    key: "4",
+    icon: <MailOutlined />,
+    label: (
+      <a href="/properties" rel="noopener noreferrer">
+        Properties
+      </a>
+    ),
+  },
 ];
 
 const columns = [
@@ -95,14 +106,7 @@ const columns = [
     render: (_, record) => (
       <Space size="middle">
         <Button size={"small"}>Edit</Button>
-        <Popconfirm
-          title="Delete the task"
-          description="Are you sure to delete this user?"
-          onConfirm={confirm}
-          onCancel={cancel}
-          okText="Yes"
-          cancelText="No"
-        >
+        <Popconfirm title="Delete user?" okText="Yes" cancelText="No">
           <Button size={"small"} danger>
             Delete
           </Button>
@@ -111,40 +115,8 @@ const columns = [
     ),
   },
 ];
-const data = [
-  {
-    key: "1",
-    name: "Alex",
-    email: "alex@zenloop.com",
-    tags: ["account_owner"],
-  },
-  {
-    key: "2",
-    name: "Artur",
-    email: "artur@zenloop.com",
-    tags: ["support"],
-  },
-  {
-    key: "3",
-    name: "Alan",
-    email: "alan@zenloop.com",
-    tags: [],
-  },
-  {
-    key: "4",
-    name: "Bartosz",
-    email: "bartosz@zenloop.com",
-    tags: [],
-  },
-  {
-    key: "5",
-    name: "Jakub",
-    email: "jakub@zenloop.com",
-    tags: [],
-  },
-];
 
-const PageContent = () => {
+const Users = () => {
   return (
     <Layout style={{ padding: "0 24px 0px" }}>
       <Row gutter={[16, 16]}>
@@ -172,15 +144,15 @@ const PageContent = () => {
           <Col flex="200px">
             <Menu
               defaultSelectedKeys={["1"]}
-              defaultOpenKeys={["sub1"]}
+              defaultOpenKeys={["1"]}
               mode="inline"
               theme="light"
               inlineCollapsed={false}
-              items={items}
+              items={menuItems}
             />
           </Col>
           <Col flex="auto">
-            <Table columns={columns} dataSource={data} />
+            <Table columns={columns} dataSource={users} />
           </Col>
         </Row>
       </Content>
@@ -188,4 +160,4 @@ const PageContent = () => {
   );
 };
 
-export default PageContent;
+export default Users;

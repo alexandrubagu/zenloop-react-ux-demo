@@ -24,7 +24,7 @@ const items = [
   },
 ];
 
-const UserMenu = () => {
+const ProfileMenu = () => {
   return (
     <div style={{ marginLeft: "auto" }}>
       <Dropdown menu={{ items }} trigger={["click"]} arrow={true}>
@@ -48,4 +48,4 @@ const UserMenu = () => {
   );
 };
 
-export default UserMenu;
+export default ProfileMenu;
