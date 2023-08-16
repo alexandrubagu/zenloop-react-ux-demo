@@ -1,14 +1,16 @@
+import roles from "../seeds/roles";
+import utils from "../utils/utils";
+
 import {
   Breadcrumb,
   Layout,
   Menu,
   Col,
   Row,
+  Card,
   Table,
-  Tag,
-  Space,
-  Popconfirm,
   Button,
+  Tag,
 } from "antd";
 
 import {
@@ -18,8 +20,6 @@ import {
   MailOutlined,
   PieChartOutlined,
 } from "@ant-design/icons";
-
-import users from "../seeds/users";
 
 const { Content } = Layout;
 
@@ -67,57 +67,39 @@ const columns = [
     title: "Name",
     dataIndex: "name",
     key: "name",
-    render: (text) => <a>{text}</a>,
   },
   {
-    title: "Email",
-    dataIndex: "email",
-    key: "email",
-  },
-  {
-    title: "Tags",
-    key: "tags",
-    dataIndex: "tags",
-    render: (_, { tags }) => (
-      <>
-        {tags.map((tag) => {
-          let color = "grey";
-          if (tag === "account_owner") {
-            color = "red";
-          }
-
-          if (tag === "support") {
-            color = "green";
-          }
-
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
+    title: "Survey Group",
+    key: "survey_group_id",
+    dataIndex: "survey_group_id",
+    render: (_, { survey_group_id }) => (
+      <Button
+        type="link"
+        size={"small"}
+        href={`/survey-groups/${survey_group_id}`}
+      >
+        {utils.getSurveyGroup(survey_group_id).name}
+      </Button>
     ),
   },
   {
-    title: "Action",
-    key: "action",
-    render: (_, { key }) => (
-      <Space size="middle">
-        <Button size={"small"} href={`/users/${key}`}>
-          Edit
-        </Button>
-        <Popconfirm title="Delete user?" okText="Yes" cancelText="No">
-          <Button size={"small"} danger>
-            Delete
-          </Button>
-        </Popconfirm>
-      </Space>
+    title: "Count",
+    key: "survey_group_id",
+    dataIndex: "survey_group_id",
+    render: (_, { key }) => <Tag>{utils.countUsersbyRole(key)}</Tag>,
+  },
+  {
+    title: "Actions",
+    key: "actions",
+    render: (_, { key, name }) => (
+      <Button size={"small"} href={`/roles/${key}`}>
+        View
+      </Button>
     ),
   },
 ];
 
-const Users = () => {
+const Roles = () => {
   return (
     <Layout style={{ padding: "0 24px 0px" }}>
       <Row gutter={[16, 16]}>
@@ -125,7 +107,7 @@ const Users = () => {
           <Breadcrumb style={{ margin: "16px 0" }}>
             <Breadcrumb.Item>Home</Breadcrumb.Item>
             <Breadcrumb.Item>Administration</Breadcrumb.Item>
-            <Breadcrumb.Item>Users</Breadcrumb.Item>
+            <Breadcrumb.Item>Roles</Breadcrumb.Item>
           </Breadcrumb>
         </Col>
         <Col
@@ -136,7 +118,9 @@ const Users = () => {
             marginTop: "10px",
           }}
         >
-          <Button type="primary" shape="circle" icon={<PlusOutlined />} />
+          <Button type="primary" icon={<PlusOutlined />}>
+            Add Role
+          </Button>
         </Col>
       </Row>
 
@@ -153,7 +137,15 @@ const Users = () => {
             />
           </Col>
           <Col flex="auto">
-            <Table columns={columns} dataSource={users} />
+            <Card
+              title="Roles"
+              bordered={false}
+              style={{
+                marginBottom: "20px",
+              }}
+            >
+              <Table size={"small"} columns={columns} dataSource={roles} />
+            </Card>
           </Col>
         </Row>
       </Content>
@@ -161,4 +153,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default Roles;

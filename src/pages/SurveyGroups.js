@@ -8,7 +8,7 @@ import {
   Tag,
   Space,
   Popconfirm,
-  message,
+  Card,
   Button,
 } from "antd";
 
@@ -20,7 +20,7 @@ import {
   PieChartOutlined,
 } from "@ant-design/icons";
 
-import users from "../seeds/users";
+import survey_groups from "../seeds/survey_groups";
 
 const { Content } = Layout;
 
@@ -70,11 +70,7 @@ const columns = [
     key: "name",
     render: (text) => <a>{text}</a>,
   },
-  {
-    title: "Email",
-    dataIndex: "email",
-    key: "email",
-  },
+
   {
     title: "Tags",
     key: "tags",
@@ -116,7 +112,7 @@ const columns = [
   },
 ];
 
-const Users = () => {
+const SurveyGroups = () => {
   return (
     <Layout style={{ padding: "0 24px 0px" }}>
       <Row gutter={[16, 16]}>
@@ -135,7 +131,9 @@ const Users = () => {
             marginTop: "10px",
           }}
         >
-          <Button type="primary" shape="circle" icon={<PlusOutlined />} />
+          <Button type="primary" icon={<PlusOutlined />}>
+            Add Survey Group
+          </Button>
         </Col>
       </Row>
 
@@ -143,8 +141,8 @@ const Users = () => {
         <Row gutter={[16, 16]}>
           <Col flex="200px">
             <Menu
-              defaultSelectedKeys={["1"]}
-              defaultOpenKeys={["1"]}
+              defaultSelectedKeys={["3"]}
+              defaultOpenKeys={["3"]}
               mode="inline"
               theme="light"
               inlineCollapsed={false}
@@ -152,7 +150,19 @@ const Users = () => {
             />
           </Col>
           <Col flex="auto">
-            <Table columns={columns} dataSource={users} />
+            <Card
+              title="Survey Groups"
+              bordered={false}
+              style={{
+                marginBottom: "20px",
+              }}
+            >
+              <Table
+                size={"small"}
+                columns={columns}
+                dataSource={survey_groups}
+              />
+            </Card>
           </Col>
         </Row>
       </Content>
@@ -160,4 +170,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default SurveyGroups;

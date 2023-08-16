@@ -5,10 +5,9 @@ import {
   Col,
   Row,
   Table,
-  Tag,
   Space,
   Popconfirm,
-  message,
+  Card,
   Button,
 } from "antd";
 
@@ -20,7 +19,7 @@ import {
   PieChartOutlined,
 } from "@ant-design/icons";
 
-import users from "../seeds/users";
+import properties from "../seeds/properties";
 
 const { Content } = Layout;
 
@@ -68,37 +67,16 @@ const columns = [
     title: "Name",
     dataIndex: "name",
     key: "name",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Email",
-    dataIndex: "email",
-    key: "email",
-  },
-  {
-    title: "Tags",
-    key: "tags",
-    dataIndex: "tags",
-    render: (_, { tags }) => (
-      <>
-        {tags.map((tag) => {
-          let color = "grey";
-          if (tag === "account_owner") {
-            color = "red";
-          }
-
-          if (tag === "support") {
-            color = "green";
-          }
-
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
+    render: (_, { name, key }) => (
+      <Button size={"small"} type="link" href={`/properties/${key}`}>
+        {name}
+      </Button>
     ),
+  },
+  {
+    title: "Value",
+    dataIndex: "value",
+    key: "value",
   },
   {
     title: "Action",
@@ -116,7 +94,7 @@ const columns = [
   },
 ];
 
-const Users = () => {
+const Properties = () => {
   return (
     <Layout style={{ padding: "0 24px 0px" }}>
       <Row gutter={[16, 16]}>
@@ -124,7 +102,7 @@ const Users = () => {
           <Breadcrumb style={{ margin: "16px 0" }}>
             <Breadcrumb.Item>Home</Breadcrumb.Item>
             <Breadcrumb.Item>Administration</Breadcrumb.Item>
-            <Breadcrumb.Item>Users</Breadcrumb.Item>
+            <Breadcrumb.Item>Properties</Breadcrumb.Item>
           </Breadcrumb>
         </Col>
         <Col
@@ -152,7 +130,15 @@ const Users = () => {
             />
           </Col>
           <Col flex="auto">
-            <Table columns={columns} dataSource={users} />
+            <Card
+              title="Properties"
+              bordered={false}
+              style={{
+                marginBottom: "20px",
+              }}
+            >
+              <Table size={"small"} columns={columns} dataSource={properties} />
+            </Card>
           </Col>
         </Row>
       </Content>
@@ -160,4 +146,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default Properties;

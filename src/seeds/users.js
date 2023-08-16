@@ -4,7 +4,7 @@ export default [{
     email: "alex@zenloop.com",
     tags: ["account_owner"],
     property_ids: ["1", "2"],
-    survey_group_ids: ["1", ""]
+    role_ids: ["1"]
   },
   {
     key: "2",
@@ -12,7 +12,7 @@ export default [{
     email: "artur@zenloop.com",
     tags: ["support"],
     property_ids: [],
-    survey_group_ids: ["1"]
+    role_ids: ["2", "13"]
   },
   {
     key: "3",
@@ -20,7 +20,7 @@ export default [{
     email: "alan@zenloop.com",
     tags: [],
     property_ids: ["3", "4"],
-    survey_group_ids: ["1"]
+    role_ids: ["9", "15"]
   },
   {
     key: "4",
@@ -28,7 +28,7 @@ export default [{
     email: "bartosz@zenloop.com",
     tags: [],
     property_ids: [],
-    survey_group_ids: ["1"]
+    role_ids: ["6", "12"]
   },
   {
     key: "5",
@@ -36,6 +36,6 @@ export default [{
     email: "jakub@zenloop.com",
     tags: [],
     property_ids: ["3", "5"],
-    survey_group_ids: ["1"]
+    role_ids: ["3", "6", "12"]
   },
 ];

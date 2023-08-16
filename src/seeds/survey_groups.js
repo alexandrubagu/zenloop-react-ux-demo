@@ -16,14 +16,12 @@ export default [
   },
   {
     key: "4",
-    name: "Bartosz",
-    email: "bartosz@zenloop.com",
+    name: "Survey Group 3",
     tags: [],
   },
   {
     key: "5",
-    name: "Jakub",
-    email: "jakub@zenloop.com",
+    name: "Survey Group 4",
     tags: [],
   },
 ];

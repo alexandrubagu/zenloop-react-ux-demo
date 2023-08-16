@@ -68,7 +68,6 @@ const columns = [
     title: "Name",
     dataIndex: "name",
     key: "name",
-    render: (text) => <a>{text}</a>,
   },
   {
     title: "Email",
@@ -154,7 +153,7 @@ const Users = () => {
             />
           </Col>
           <Col flex="auto">
-            <Table columns={columns} dataSource={users} />
+            <Table size={"small"} columns={columns} dataSource={users} />
           </Col>
         </Row>
       </Content>

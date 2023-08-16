@@ -77,24 +77,60 @@ const layout = {
   },
 };
 
-const columns = [
+const rolesColumns = [
+  {
+    title: "Role",
+    dataIndex: "name",
+    key: "name",
+    render: (_, { key, name }) => {
+      return (
+        <Button type="link" href={`/roles/${key}`}>
+          {name}
+        </Button>
+      );
+    },
+  },
+  {
+    title: "Survey Group",
+    dataIndex: "survey_group",
+    key: "survey_group",
+    render: (_, { survey_group_id }) => {
+      return (
+        <Button type="link" href={`/survey-groups/${survey_group_id}`}>
+          {utils.getSurveyGroup(survey_group_id).name}
+        </Button>
+      );
+    },
+  },
+];
+
+const propertyColumns = [
   {
     title: "Name",
     dataIndex: "name",
     key: "name",
-    render: (text) => <a>{text}</a>,
   },
   {
     title: "Value",
     dataIndex: "value",
     key: "value",
   },
+  {
+    title: "Actions",
+    key: "action",
+    render: (_, { key }) => (
+      <Button size={"small"} href={`/properties/${key}`}>
+        View
+      </Button>
+    ),
+  },
 ];
 
-const Users = () => {
+const User = () => {
   let { userId } = useParams();
   const user = utils.getUser(userId);
   const properties = utils.getUserProperties(user.property_ids);
+  const roles = utils.getUserRoles(user.role_ids);
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -111,7 +147,8 @@ const Users = () => {
           <Breadcrumb style={{ margin: "16px 0" }}>
             <Breadcrumb.Item>Home</Breadcrumb.Item>
             <Breadcrumb.Item>Administration</Breadcrumb.Item>
-            <Breadcrumb.Item>Users</Breadcrumb.Item>
+            <Breadcrumb.Item href="/users">Users</Breadcrumb.Item>
+            <Breadcrumb.Item>{userId}</Breadcrumb.Item>
           </Breadcrumb>
         </Col>
       </Row>
@@ -177,9 +214,7 @@ const Users = () => {
                 </Button>
               }
             >
-              <p>{user.name}</p>
-              <p>Card content</p>
-              <p>Card content</p>
+              <Table size={"small"} columns={rolesColumns} dataSource={roles} />
             </Card>
 
             <Card
@@ -194,7 +229,11 @@ const Users = () => {
                 </Button>
               }
             >
-              <Table columns={columns} dataSource={properties} />
+              <Table
+                size={"small"}
+                columns={propertyColumns}
+                dataSource={properties}
+              />
             </Card>
           </Col>
         </Row>
@@ -203,4 +242,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default User;

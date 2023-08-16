@@ -9,40 +9,40 @@ import SurveyGroup from "./pages/SurveyGroup";
 
 const Routes = [
   {
-    path: "/",
-    element: <Users />,
+    path: "/users/:userId",
+    element: <User />,
   },
   {
     path: "/users",
     element: <Users />,
   },
   {
-    path: "/users/:userId",
-    element: <User />,
+    path: "/roles/:roleId",
+    element: <Role />,
   },
   {
     path: "/roles",
     element: <Roles />,
   },
   {
-    path: "/roles/:roleId",
-    element: <Role />,
+    path: "/properties/:propertyId",
+    element: <Property />,
   },
   {
     path: "/properties",
     element: <Properties />,
   },
   {
-    path: "/properties/:propertyId",
-    element: <Property />,
+    path: "/survey-groups/:surveyGroupId",
+    element: <SurveyGroup />,
   },
   {
     path: "/survey-groups",
     element: <SurveyGroups />,
   },
   {
-    path: "/survey-groups/:surveyGroupId",
-    element: <SurveyGroup />,
+    path: "/",
+    element: <Users />,
   },
 ];
 
